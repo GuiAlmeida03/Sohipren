@@ -1,84 +1,123 @@
-# 📊 Sohipren - Análise e Previsão de Faturamento
+# Sohipren - Análise e Previsão de Faturamento
 
-Este é um aplicativo web interativo construído com Streamlit para analisar dados de faturamento a partir de um arquivo Excel. A ferramenta permite visualizar tendências históricas, decompor a série temporal em seus componentes principais (tendência, sazonalidade) e gerar previsões de faturamento futuro utilizando os modelos estatísticos SARIMA e Prophet.
+![Linguagem](https://img.shields.io/badge/Python-3.10+-blue.svg)
+![Framework](https://img.shields.io/badge/Flask-2.x-black.svg)
+![Análise](https://img.shields.io/badge/Pandas-2.x-blue.svg)
+![Previsão](https://img.shields.io/badge/Prophet-1.1-blue.svg)
+![Gráficos](https://img.shields.io/badge/Plotly-5.x-purple.svg)
+![Tradução](https://img.shields.io/badge/Babel-2.x-red.svg)
 
-## ✨ Funcionalidades Principais
+## 📖 Visão Geral
 
-* **📤 Upload Interativo:** Carregue facilmente seus relatórios de faturamento em formato `.xlsx`.
-* **📉 Análise Descritiva:** Decomposição da série temporal para visualizar tendência, sazonalidade e resíduos.
-* **🔮 Modelagem Preditiva:** Utilize modelos robustos como **Prophet** e **Auto-SARIMA** para prever o faturamento futuro.
-* **📈 Métricas de Desempenho:** Avalie a precisão do modelo com métricas como MAE, RMSE, R² e MAPE.
-* **🧑‍🤝‍🧑 Análise de Grupos:** Identifique e visualize a tendência de faturamento dos principais produtos e clientes.
-* **📦 Previsão Individual:** Gere previsões de faturamento específicas para os produtos mais importantes.
-* **🎛️ Interface Customizável:** Ajuste parâmetros do modelo, como frequência de agregação e períodos de previsão, diretamente na interface.
-* **📥 Exportação de Dados:** Baixe os dados tratados e as tabelas de previsão em formato CSV.
+**Sohipren** é uma aplicação web completa, desenvolvida em Python com o framework Flask, projetada para realizar análises detalhadas e previsões de séries temporais de dados de faturamento. O projeto evoluiu de uma ferramenta de prototipagem para uma aplicação web robusta, multilíngue e interativa.
 
-## ⚙️ Como Funciona
+A ferramenta permite que um usuário carregue um relatório de vendas em formato Excel, visualize KPIs (Key Performance Indicators) importantes, analise tendências e gere previsões de faturamento futuras usando o modelo **Prophet** do Facebook.
 
-O fluxo de trabalho da aplicação é o seguinte:
+## ✨ Principais Funcionalidades
 
-1.  **Carregamento e Limpeza:** O usuário carrega um arquivo Excel. A aplicação, usando a biblioteca Pandas, lê os dados, converte as colunas de data e trata valores ausentes ou não numéricos.
-2.  **Agregação:** Os dados detalhados (diários, por nota) são agregados em uma frequência definida pelo usuário (mensal, semanal ou diária).
-3.  **Análise e Modelagem:** A classe `FaturamentoForecast` executa o pipeline principal:
-    * Decompõe a série temporal para análise.
-    * Divide os dados em conjuntos de treino e teste.
-    * Treina o modelo escolhido (Prophet ou SARIMA) com os dados de treino.
-    * Valida o modelo com os dados de teste e calcula as métricas de erro.
-4.  **Geração de Previsões:** Após o treinamento, o modelo é usado para prever os períodos futuros definidos pelo usuário.
-5.  **Visualização:** Todos os resultados, incluindo gráficos de validação, previsão futura e análises de grupos, são exibidos na interface do Streamlit.
+- **Upload de Dados Simplificado:** Carregue facilmente arquivos `.xlsx` através de uma interface web amigável.
+- **Dashboard de KPIs:** Visualize instantaneamente os números mais importantes do seu negócio, como Faturamento Total, Ticket Médio, Total de Transações, Clientes e Produtos Únicos.
+- **Previsão de Faturamento Configurável:** Utilize o poder do Prophet para gerar previsões, com parâmetros de modelo (frequência, períodos, sazonalidade, etc.) totalmente configuráveis pelo usuário.
+- **Gráficos Interativos:** Todos os gráficos de previsão são gerados com a biblioteca **Plotly**, permitindo zoom, visualização de valores ao passar o mouse e a capacidade de ligar/desligar séries de dados clicando na legenda.
+- **Comparação de Produtos:** Selecione dois produtos e visualize suas previsões de faturamento lado a lado em gráficos interativos para uma análise comparativa direta.
+- **Exportação de Dados:** Exporte a tabela detalhada da previsão gerada para os formatos **CSV** e **Excel (.xlsx)** com um único clique.
+- **Suporte a Múltiplos Idiomas (i18n):** A interface está totalmente traduzida para **Português, Inglês e Espanhol**, com um seletor manual para fácil alternância.
 
-## 📁 Estrutura do Projeto
+- ## 🛠️ Tecnologias Utilizadas
 
-* `streamlit_app.py`: Script principal que define a interface do usuário e o fluxo da aplicação web com Streamlit.
-* `faturamento_forecast_class.py`: Contém a classe `FaturamentoForecast`, que encapsula toda a lógica de negócio (carregamento de dados, tratamento, modelagem e geração de gráficos).
-* `requirements.txt`: Lista de todas as bibliotecas Python necessárias para o projeto.
-* `README.md`: Este arquivo de documentação.
+- **Backend:** Python, Flask
+- **Análise de Dados e Modelagem:** Pandas, Prophet (do Facebook)
+- **Frontend:** HTML5, CSS3, Bootstrap 5 (via tema Bootswatch "Darkly")
+- **Gráficos Interativos:** Plotly.js
+- **Internacionalização (i18n):** Flask-Babel, Gettext
 
-## 🚀 Como Executar Localmente
+- ## 📁 Estrutura do Projeto
 
-Siga os passos abaixo para configurar e executar o projeto em sua máquina.
+- sohipren-flask/
+|-- app.py                # Servidor Flask, rotas e lógica principal da aplicação
+|-- faturamento_forecast_class.py # Classe com toda a lógica de análise e previsão
+|-- static/               # Arquivos estáticos (CSS, JS, Imagens)
+|   -- css/ |-- style.css     # Estilos customizados (ex: inputs escuros)
+|-- templates/            # Templates HTML (a "cara" do site)
+|   |-- index.html        # Página inicial com o formulário de upload e configuração
+|   -- results.html # Página que exibe todos os resultados da análise |-- translations/ # Pasta com os arquivos de tradução | |-- en/LC_MESSAGES/ | | |-- messages.po # Arquivo de tradução para Inglês | |-- messages.mo   # Arquivo compilado de tradução
+|   -- es/LC_MESSAGES/ | |-- messages.po # Arquivo de tradução para Espanhol |-- messages.mo   # Arquivo compilado de tradução
+|-- uploads/              # Pasta temporária para arquivos carregados e gerados
+|-- .gitignore            # Arquivos e pastas a serem ignorados pelo Git
+|-- babel.cfg             # Arquivo de configuração para o Flask-Babel
+`-- requirements.txt      # Lista de todas as dependências do projeto
+
+## 🚀 Configuração e Instalação
+
+Siga os passos abaixo para rodar o projeto em sua máquina local.
 
 ### Pré-requisitos
+- [Git](https://git-scm.com/downloads)
+- [Python](https://www.python.org/downloads/) (versão 3.10 ou superior)
 
-* Python 3.9 ou superior
-* pip (gerenciador de pacotes do Python)
-* Git (opcional, para clonar o repositório)
-
-### Instalação
+### Passos de Instalação
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/GuiAlmeida03/Sohipren-.git](https://github.com/GuiAlmeida03/Sohipren-.git)
+    git clone [https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git)
+    cd SEU_REPOSITORIO
     ```
 
-2.  **Navegue até a pasta do projeto:**
+2.  **Crie e ative um ambiente virtual (altamente recomendado):**
     ```bash
-    cd Sohipren-
-    ```
-
-3.  **Crie um ambiente virtual (altamente recomendado):**
-    ```bash
+    # Criar o ambiente
     python -m venv venv
+
+    # Ativar no Windows (PowerShell)
+    .\venv\Scripts\Activate.ps1
+
+    # Ativar no Linux/macOS
+    source venv/bin/activate
     ```
 
-4.  **Ative o ambiente virtual:**
-    * **No Windows:**
-        ```bash
-        .\venv\Scripts\activate
-        ```
-    * **No macOS/Linux:**
-        ```bash
-        source venv/bin/activate
-        ```
-
-5.  **Instale as dependências listadas no `requirements.txt`:**
+3.  **Instale todas as dependências:**
     ```bash
     pip install -r requirements.txt
     ```
 
-### Executando a Aplicação
+    ## 🌐 Fluxo de Trabalho para Traduções (i18n)
 
-Com o ambiente virtual ativado e as dependências instaladas, execute o seguinte comando no terminal:
+A aplicação já vem com as traduções para Inglês e Espanhol. Caso você altere ou adicione textos na interface, siga os passos abaixo para atualizar os arquivos de tradução.
+
+1.  **Extrair os textos:** Este comando varre o código em busca de textos novos e atualiza o arquivo "molde" `messages.pot`.
+    ```bash
+    python -m babel.messages.frontend extract -F babel.cfg -o messages.pot .
+    ```
+
+2.  **Atualizar os arquivos de idioma:** Este comando mescla as novas alterações nos arquivos `.po` de cada idioma.
+    ```bash
+    python -m babel.messages.frontend update -i messages.pot -d translations
+    ```
+
+3.  **Traduzir:** Abra os arquivos `.po` na pasta `translations` e preencha as novas traduções no campo `msgstr ""`.
+
+4.  **Compilar as traduções:** Este é o passo final para que as traduções apareçam na aplicação.
+    ```bash
+    python -m babel.messages.frontend compile -d translations
+    ```
+
+    ## ▶️ Como Executar a Aplicação
+
+Com as dependências instaladas e as traduções compiladas, inicie o servidor Flask com o seguinte comando:
 
 ```bash
-streamlit run streamlit_app.py
+python -m flask run --debug
+
+O servidor estará rodando em modo de depuração. Abra seu navegador e acesse:
+
+https://www.google.com/search?q=http://127.0.0.1:5000
+
+
+
+## 💡 Como Usar
+
+1.  **Escolha o Idioma:** Utilize os links no canto superior direito para alternar entre Português, Inglês e Espanhol.
+2.  **Carregue o Arquivo:** Na página inicial, clique para carregar seu arquivo Excel.
+3.  **Configure a Análise:** Verifique se os nomes das colunas de Data, Valor, Produto e Cliente correspondem aos do seu arquivo. Ajuste os parâmetros do modelo conforme sua necessidade.
+4.  **Execute:** Clique em "Executar Análise".
+5.  **Analise os Resultados:** Navegue pelos KPIs, gráficos interativos e tabelas na página de resultados. Use a funcionalidade de comparação e exporte os dados se necessário.
