@@ -1,0 +1,29 @@
+/*
+  Este código sobrescreve o estilo padrão dos campos de formulário do tema 'Darkly'.
+*/
+
+/* Estilo para os campos de texto e caixas de seleção */
+.form-control, .form-select {
+    background-color: #222; /* Um cinza bem escuro, quase preto */
+    color: #fff; /* Cor do texto (branco) */
+    border-color: #444; /* Cor da borda um pouco mais clara */
+}
+
+/* Estilo para quando você clica no campo (foco) */
+.form-control:focus, .form-select:focus {
+    background-color: #333; /* Fundo levemente mais claro ao selecionar */
+    color: #fff;
+    border-color: #0d6efd; /* Borda azul padrão do Bootstrap para indicar foco */
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Sombra externa azul ao focar */
+}
+
+/* Garante que o texto de um item selecionado na caixa de seleção seja branco */
+.form-select option {
+    background-color: #222;
+    color: #fff;
+}
+
+/* Cor do texto do seletor de arquivo */
+.form-control[type="file"] {
+    color: #ccc;
+}

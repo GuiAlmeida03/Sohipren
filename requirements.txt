@@ -1,5 +1,5 @@
 # requirements.txt
-streamlit
+Flask
 pandas==2.2.2
 numpy~=1.26.4
 matplotlib
@@ -10,3 +10,5 @@ scikit-learn
 pmdarima
 prophet
 openpyxl
+plotly
+Flask-Babel
