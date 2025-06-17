@@ -113,7 +113,7 @@ O servidor estará rodando em modo de depuração. Abra seu navegador e acesse:
 https://www.google.com/search?q=http://127.0.0.1:5000
 
 
-```markdown
+
 ## 💡 Como Usar
 
 1.  **Escolha o Idioma:** Utilize os links no canto superior direito para alternar entre Português, Inglês e Espanhol.
