@@ -1,0 +1,560 @@
+# English translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-06-17 07:31-0300\n"
+"PO-Revision-Date: 2024-03-18 12:00+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: English <en@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: app.py:73
+msgid "Você deve estar logado para prosseguir."
+msgstr ""
+
+#: app.py:80
+msgid "Sessão expirada. Faça login novamente."
+msgstr ""
+
+#: app.py:98
+msgid "Usuário ou senha inválidos."
+msgstr ""
+
+#: app.py:122
+msgid "Bombas e motores de engrenagens"
+msgstr ""
+
+#: app.py:125
+msgid ""
+"Soluções completas em bombas e motores de engrenagens para diversas "
+"aplicações industriais."
+msgstr ""
+
+#: app.py:128
+msgid "Bombas de pistões"
+msgstr ""
+
+#: app.py:131
+msgid ""
+"Bombas de pistões de alta performance para sistemas hidráulicos de alta "
+"pressão."
+msgstr ""
+
+#: app.py:134
+msgid "Vávulas óleo hidráulicas"
+msgstr ""
+
+#: app.py:137
+msgid ""
+"Linha completa de válvulas para controle e direcionamento de fluxo em "
+"sistemas hidráulicos."
+msgstr ""
+
+#: app.py:140
+msgid "Motores orbitais"
+msgstr ""
+
+#: app.py:143
+msgid ""
+"Motores orbitais de alta eficiência para aplicações que exigem precisão e"
+" confiabilidade."
+msgstr ""
+
+#: app.py:146
+msgid "Direções hidrostáticas"
+msgstr ""
+
+#: app.py:149
+msgid "Sistemas de direção hidrostática para veículos industriais e agrícolas."
+msgstr ""
+
+#: app.py:152
+msgid "Mangueiras óleo-hidráulicas"
+msgstr ""
+
+#: app.py:155
+msgid ""
+"Mangueiras de alta pressão para conexão e transferência de fluidos "
+"hidráulicos."
+msgstr ""
+
+#: app.py:158
+msgid "Tomadas de força"
+msgstr ""
+
+#: app.py:161
+msgid "Tomadas de força para transmissão de potência em equipamentos industriais."
+msgstr ""
+
+#: app.py:164
+msgid "Servos de direção"
+msgstr ""
+
+#: app.py:167
+msgid "Servos de direção para controle preciso em sistemas hidráulicos."
+msgstr ""
+
+#: app.py:170
+#, fuzzy
+msgid "Desenvolvimento de soluções hidráulicas"
+msgstr "Excellence in Hydraulic Solutions"
+
+#: app.py:173
+msgid ""
+"Soluções personalizadas em hidráulica para atender às necessidades "
+"específicas do seu projeto."
+msgstr ""
+
+#: app.py:176
+msgid "Peças e acessórios"
+msgstr ""
+
+#: app.py:179
+msgid "Peças e acessórios para manutenção e reparo de sistemas hidráulicos."
+msgstr ""
+
+#: app.py:229
+#, fuzzy
+msgid "previsao.csv"
+msgstr "Forecast"
+
+#: app.py:236
+#, fuzzy
+msgid "Arquivo não encontrado."
+msgstr "Data file not found."
+
+#: app.py:240 faturamento_forecast_class.py:148
+msgid "Previsao"
+msgstr "Forecast"
+
+#: app.py:246
+#, fuzzy
+msgid "previsao_faturamento.xlsx"
+msgstr "Revenue Forecast"
+
+#: app.py:258
+msgid "Informações ausentes."
+msgstr ""
+
+#: app.py:260
+#, fuzzy
+msgid "Por favor, selecione dois produtos diferentes."
+msgstr "Please select two different products to compare."
+
+#: app.py:264
+msgid "Arquivo de dados não encontrado."
+msgstr "Data file not found."
+
+#: app.py:283
+msgid "Não foi possível gerar o gráfico de comparação."
+msgstr "Could not generate comparison chart."
+
+#: faturamento_forecast_class.py:110
+msgid "Histórico (Treino)"
+msgstr "History (Training)"
+
+#: faturamento_forecast_class.py:111
+msgid "Valores Reais (Teste)"
+msgstr "Real Values (Test)"
+
+#: faturamento_forecast_class.py:112
+#, python-format
+msgid "Previsão %(modelo)s (Teste)"
+msgstr "%(modelo)s Forecast (Test)"
+
+#: faturamento_forecast_class.py:115 faturamento_forecast_class.py:125
+#: faturamento_forecast_class.py:191
+msgid "Intervalo de Confiança"
+msgstr "Confidence Interval"
+
+#: faturamento_forecast_class.py:116
+#, python-format
+msgid "Validação do Modelo %(modelo)s: Previsão vs. Real"
+msgstr "%(modelo)s Model Validation: Forecast vs. Real"
+
+#: faturamento_forecast_class.py:116 faturamento_forecast_class.py:126
+#: faturamento_forecast_class.py:149 faturamento_forecast_class.py:194
+msgid "Data"
+msgstr "Date"
+
+#: faturamento_forecast_class.py:122
+msgid "Histórico Completo"
+msgstr "Complete History"
+
+#: faturamento_forecast_class.py:123 templates/results.html:40
+msgid "Previsão Futura"
+msgstr "Future Forecast"
+
+#: faturamento_forecast_class.py:126
+#, python-format
+msgid "Previsão de %(valor)s (%(modelo)s) - Próximos %(n)s Períodos"
+msgstr "%(valor)s Forecast (%(modelo)s) - Next %(n)s Periods"
+
+#: faturamento_forecast_class.py:148
+msgid "IC_Inferior"
+msgstr "Lower_CI"
+
+#: faturamento_forecast_class.py:148
+msgid "IC_Superior"
+msgstr "Upper_CI"
+
+#: faturamento_forecast_class.py:192
+msgid "Previsão"
+msgstr "Forecast"
+
+#: faturamento_forecast_class.py:193
+msgid "Histórico"
+msgstr "History"
+
+#: faturamento_forecast_class.py:194
+#, python-format
+msgid "Previsão para: %(produto)s"
+msgstr "Forecast for: %(produto)s"
+
+#: faturamento_forecast_class.py:194
+msgid "Valor Total"
+msgstr "Total Value"
+
+#: templates/admin.html:2 templates/admin.html:5
+msgid "Área de Administrador"
+msgstr "Administrator Area"
+
+#: templates/base.html:29 templates/base.html:62
+msgid "Excelência em Soluções Oleohidráulicas"
+msgstr "Excellence in Hydraulic Solutions"
+
+#: templates/base.html:34
+msgid "Você está Logado"
+msgstr "You are Logged In"
+
+#: templates/base.html:35
+msgid "Deslogar"
+msgstr "Logout"
+
+# Login page
+#: templates/base.html:38 templates/login.html:2 templates/login.html:12
+msgid "Login"
+msgstr "Login"
+
+#: templates/base.html:42
+msgid "Idioma:"
+msgstr "Language:"
+
+#: templates/base.html:65
+msgid "Contato"
+msgstr ""
+
+#: templates/base.html:72
+msgid "Redes Sociais"
+msgstr ""
+
+#: templates/base.html:89
+msgid "Por favor, selecione dois produtos diferentes para comparar."
+msgstr "Please select two different products to compare."
+
+#: templates/base.html:90 templates/results.html:115
+msgid "Gerando gráfico comparativo..."
+msgstr "Generating comparison chart..."
+
+#: templates/base.html:91 templates/results.html:129
+msgid "Erro:"
+msgstr "Error:"
+
+#: templates/base.html:92 templates/results.html:132
+msgid "Erro de conexão ao gerar previsão."
+msgstr "Connection error while generating forecast."
+
+#: templates/base.html:93
+msgid "Entrada bloqueada por segurança."
+msgstr "Input blocked for security."
+
+#: templates/base.html:94
+msgid "Atividade suspeita detectada. Operação bloqueada."
+msgstr "Suspicious activity detected. Operation blocked."
+
+#: templates/home1.html:3
+#, fuzzy
+msgid "Sohipren S.A. - Soluções em Oleohidráulica"
+msgstr "Excellence in Hydraulic Solutions"
+
+#: templates/home1.html:8
+#, fuzzy
+msgid "Soluções em Oleohidráulica"
+msgstr "Excellence in Hydraulic Solutions"
+
+#: templates/home1.html:9
+msgid "Tecnologia e inovação para sua indústria"
+msgstr ""
+
+#: templates/home1.html:16
+msgid "Nossos Produtos"
+msgstr ""
+
+#: templates/home1.html:17
+msgid "Conheça nossa linha completa de produtos oleohidráulicos"
+msgstr ""
+
+#: templates/home1.html:30
+#, fuzzy
+msgid "Explorar"
+msgstr "Logout"
+
+#: templates/home1.html:49
+msgid "Qualidade"
+msgstr ""
+
+#: templates/home1.html:50
+msgid "Produtos de alta performance e durabilidade"
+msgstr ""
+
+#: templates/home1.html:54
+msgid "Suporte Técnico"
+msgstr ""
+
+#: templates/home1.html:55
+msgid "Assistência especializada para sua empresa"
+msgstr ""
+
+#: templates/home1.html:59
+#, fuzzy
+msgid "Entrega Rápida"
+msgstr "Enter"
+
+#: templates/home1.html:60
+msgid "Logística eficiente em todo o Brasil"
+msgstr ""
+
+#: templates/index.html:8
+msgid "Previsão de Faturamento"
+msgstr "Revenue Forecast"
+
+#: templates/index.html:14
+msgid "Análise e Previsão de Faturamento"
+msgstr "Revenue Analysis and Forecast"
+
+#: templates/index.html:15
+msgid "Carregue seu relatório de vendas em Excel para iniciar a análise."
+msgstr "Upload your sales report in Excel to start the analysis."
+
+#: templates/index.html:20
+msgid "Controles da Análise"
+msgstr "Analysis Controls"
+
+#: templates/index.html:23
+msgid "1. Carregar Arquivo Excel (.xlsx)"
+msgstr "1. Upload Excel File (.xlsx)"
+
+#: templates/index.html:29
+msgid "Coluna de Data"
+msgstr "Date Column"
+
+#: templates/index.html:33
+msgid "Coluna de Valor"
+msgstr "Value Column"
+
+#: templates/index.html:37
+msgid "Coluna de Produto"
+msgstr "Product Column"
+
+#: templates/index.html:41
+msgid "Coluna de Cliente"
+msgstr "Customer Column"
+
+#: templates/index.html:47
+msgid "Configurações do Modelo"
+msgstr "Model Settings"
+
+#: templates/index.html:49
+msgid "Escolha o Modelo Principal"
+msgstr "Choose Main Model"
+
+#: templates/index.html:56
+msgid "Frequência de Agregação"
+msgstr "Aggregation Frequency"
+
+#: templates/index.html:58
+msgid "Mensal"
+msgstr "Monthly"
+
+#: templates/index.html:59
+msgid "Semanal"
+msgstr "Weekly"
+
+#: templates/index.html:60
+msgid "Diário"
+msgstr "Daily"
+
+#: templates/index.html:64
+msgid "Períodos para Prever no Futuro"
+msgstr "Periods to Forecast"
+
+#: templates/index.html:68
+#, python-format
+msgid "Proporção para Teste (Ex: 0.2 para 20%%)"
+msgstr "Test Proportion (Ex: 0.2 for 20%%)"
+
+#: templates/index.html:72
+msgid "Parâmetros Avançados do Prophet"
+msgstr "Advanced Prophet Parameters"
+
+#: templates/index.html:75
+msgid "Modo da Sazonalidade"
+msgstr "Seasonality Mode"
+
+#: templates/index.html:77
+msgid "Aditiva"
+msgstr "Additive"
+
+#: templates/index.html:78
+msgid "Multiplicativa"
+msgstr "Multiplicative"
+
+#: templates/index.html:82
+msgid "Flexibilidade da Tendência:"
+msgstr "Trend Flexibility:"
+
+#: templates/index.html:86
+msgid "Força da Sazonalidade:"
+msgstr "Seasonality Strength:"
+
+#: templates/index.html:91
+msgid "Executar Análise"
+msgstr "Run Analysis"
+
+#: templates/login.html:17
+msgid "Usuário"
+msgstr "Username"
+
+#: templates/login.html:19
+msgid "Senha"
+msgstr "Password"
+
+#: templates/login.html:21
+msgid "Entrar"
+msgstr "Enter"
+
+#: templates/results.html:8
+msgid "Resultados da Análise"
+msgstr "Analysis Results"
+
+#: templates/results.html:22
+msgid "Voltar para a Análise"
+msgstr "Back to Analysis"
+
+#: templates/results.html:23
+msgid "Resultados da Previsão"
+msgstr "Forecast Results"
+
+#: templates/results.html:25
+msgid "Visão Geral do Período"
+msgstr "Period Overview"
+
+#: templates/results.html:28
+msgid "Faturamento Total"
+msgstr "Total Revenue"
+
+#: templates/results.html:29
+msgid "Ticket Médio"
+msgstr "Average Ticket"
+
+#: templates/results.html:30
+msgid "Total de Transações"
+msgstr "Total Transactions"
+
+#: templates/results.html:31
+msgid "Produtos Únicos"
+msgstr "Unique Products"
+
+#: templates/results.html:32
+msgid "Clientes Únicos"
+msgstr "Unique Customers"
+
+#: templates/results.html:33
+msgid "Período de Análise"
+msgstr "Analysis Period"
+
+#: templates/results.html:41
+msgid "Validação"
+msgstr "Validation"
+
+#: templates/results.html:46
+msgid "Gráfico de previsão futura não gerado."
+msgstr "Future forecast chart not generated."
+
+#: templates/results.html:49
+msgid "Gráfico de validação não gerado."
+msgstr "Validation chart not generated."
+
+#: templates/results.html:53
+msgid "Tabela Detalhada da Previsão"
+msgstr "Detailed Forecast Table"
+
+#: templates/results.html:78
+msgid "Exportar para CSV"
+msgstr "Export to CSV"
+
+#: templates/results.html:79
+msgid "Exportar para Excel (.xlsx)"
+msgstr "Export to Excel (.xlsx)"
+
+#: templates/results.html:83
+msgid "Comparar Previsão de Produtos"
+msgstr "Compare Product Forecasts"
+
+#: templates/results.html:86
+msgid "Produto 1"
+msgstr "Product 1"
+
+#: templates/results.html:87
+msgid "Produto 2"
+msgstr "Product 2"
+
+#: templates/results.html:89
+msgid "Gerar Gráfico Comparativo"
+msgstr "Generate Comparative Chart"
+
+#: templates/results.html:92
+msgid "Análise de produtos não gerou uma lista para seleção."
+msgstr "Product analysis did not generate a list for selection."
+
+#~ msgid "Informações ausentes."
+#~ msgstr "Missing information."
+
+#~ msgid "Por favor, selecione dois produtos diferentes."
+#~ msgstr "Please select two different products."
+
+# Index page
+#~ msgid "Início"
+#~ msgstr "Home"
+
+#~ msgid "Bem-vindo(a) à Sohipren S.A."
+#~ msgstr "Welcome to Sohipren S.A."
+
+#~ msgid "Sua plataforma para análise e previsão de faturamento."
+#~ msgstr "Your platform for revenue analysis and forecasting."
+
+#~ msgid ""
+#~ "Navegue usando os links no cabeçalho "
+#~ "ou faça login para acessar a área"
+#~ " administrativa."
+#~ msgstr ""
+#~ "Navigate using the links in the "
+#~ "header or log in to access the "
+#~ "administrative area."
+
+#~ msgid "Acessar Painel"
+#~ msgstr "Access Panel"
+
+#~ msgid "Análise de Faturamento"
+#~ msgstr "Revenue Analysis"
+

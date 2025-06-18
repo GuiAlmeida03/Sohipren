@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.center-analyze-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-outline-primary {
+    border-width: 2px;
+}
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+    background: #1976d2;
+    color: #fff;
+    border-color: #1976d2;
+}
+</style>
+<div class="center-analyze-container">
+    <div class="w-100" style="max-width: 600px;">
+        <h1>📊 {{ _('Análise e Previsão de Faturamento') }}</h1>
+        <p>{{ _('Carregue seu relatório de vendas em Excel para iniciar a análise.') }}</p>
+        <hr>
+        
+        <form action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data" id="analyze-form">
+            <h3>⚙️ {{ _('Controles da Análise') }}</h3>
+            
+            <div class="mb-3">
+                <label for="file" class="form-label">{{ _('1. Carregar Arquivo Excel (.xlsx)') }}</label>
+                <input class="form-control" type="file" id="file" name="file" required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="col_data" class="form-label">{{ _('Coluna de Data') }}</label>
+                    <input type="text" class="form-control" id="col_data" name="col_data" value="EMISSÃO">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="col_valor" class="form-label">{{ _('Coluna de Valor') }}</label>
+                    <input type="text" class="form-control" id="col_valor" name="col_valor" value="VALOR TOTAL">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="col_prod" class="form-label">{{ _('Coluna de Produto') }}</label>
+                    <input type="text" class="form-control" id="col_prod" name="col_prod" value="DESCRIÇÃO MATERIAL">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="col_cli" class="form-label">{{ _('Coluna de Cliente') }}</label>
+                    <input type="text" class="form-control" id="col_cli" name="col_cli" value="RAZÃO SOCIAL CLIENTE">
+                </div>
+            </div>
+            
+            <hr>
+            <h4>{{ _('Configurações do Modelo') }}</h4>
+            <div class="mb-3">
+                <label for="model_choice" class="form-label">{{ _('Escolha o Modelo Principal') }}</label>
+                <select class="form-select" id="model_choice" name="model_choice">
+                    <option value="prophet">Prophet</option>
+                    <option value="sarima" disabled>SARIMA</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="freq_agg" class="form-label">{{ _('Frequência de Agregação') }}</label>
+                <select class="form-select" id="freq_agg" name="freq_agg">
+                    <option value="M">{{ _('Mensal') }}</option>
+                    <option value="W">{{ _('Semanal') }}</option>
+                    <option value="D">{{ _('Diário') }}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="periodos_forecast" class="form-label">{{ _('Períodos para Prever no Futuro') }}</label>
+                <input type="number" class="form-control" id="periodos_forecast" name="periodos_forecast" value="12" min="1">
+            </div>
+            <div class="mb-3">
+                <label for="test_ratio" class="form-label">{{ _('Proporção para Teste (Ex: 0.2 para 20%%)') }}</label>
+                <input type="number" class="form-control" id="test_ratio" name="test_ratio" value="0.2" min="0.1" max="0.5" step="0.05">
+            </div>
+            <details id="prophet-options">
+                <summary>{{ _('Parâmetros Avançados do Prophet') }}</summary>
+                <div class="p-3 border rounded mt-2">
+                    <div class="mb-3">
+                        <label for="prophet_seasonality_mode" class="form-label">{{ _('Modo da Sazonalidade') }}</label>
+                        <select class="form-select" id="prophet_seasonality_mode" name="prophet_seasonality_mode">
+                            <option value="additive">{{ _('Aditiva') }}</option>
+                            <option value="multiplicative">{{ _('Multiplicativa') }}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prophet_changepoint_prior_scale" class="form-label">{{ _('Flexibilidade da Tendência:') }} <span id="cp_scale_value">0.65</span></label>
+                        <input type="range" class="form-range" id="prophet_changepoint_prior_scale" name="prophet_changepoint_prior_scale" value="0.65" min="0.01" max="1.0" step="0.01">
+                    </div>
+                    <div class="mb-3">
+                        <label for="prophet_seasonality_prior_scale" class="form-label">{{ _('Força da Sazonalidade:') }} <span id="seas_scale_value">25.0</span></label>
+                        <input type="range" class="form-range" id="prophet_seasonality_prior_scale" name="prophet_seasonality_prior_scale" value="25.0" min="1.0" max="50.0" step="1.0">
+                    </div>
+                </div>
+            </details>
+            <input type="hidden" id="file_id_hidden" name="file_id" value="{{ file_id|default('') }}">
+            <button type="submit" class="btn btn-primary mt-4">🚀 {{ _('Executar Análise') }}</button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Atualiza os valores dos sliders
+    const cpScale = document.getElementById('prophet_changepoint_prior_scale');
+    const cpScaleValue = document.getElementById('cp_scale_value');
+    const seasScale = document.getElementById('prophet_seasonality_prior_scale');
+    const seasScaleValue = document.getElementById('seas_scale_value');
+
+    cpScale.addEventListener('input', function() {
+        cpScaleValue.textContent = this.value;
+    });
+
+    seasScale.addEventListener('input', function() {
+        seasScaleValue.textContent = this.value;
+    });
+});
+
+const comparisonButton = document.getElementById('run-comparison-forecast');
+if (comparisonButton) {
+    comparisonButton.addEventListener('click', function() {
+        const product1 = document.getElementById('product-selector-1').value;
+        const product2 = document.getElementById('product-selector-2').value;
+        const fileId = document.getElementById('file_id_hidden').value;
+        if (product1 === product2) { alert(window.translations['Por favor, selecione dois produtos diferentes para comparar.']); return; }
+        const container = document.getElementById('comparison-plot-container');
+        container.innerHTML = `<p>{{ _('Gerando gráfico comparativo...') }}</p>`;
+        fetch('/api/compare_products', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ product_1: product1, product_2: product2, file_id: fileId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Exibir imagens acima dos gráficos
+                let imagensHtml = '';
+                if (data.img1) {
+                    imagensHtml += `<img src="${data.img1}" alt="Imagem Produto 1" style="max-width:120px;max-height:120px;margin-right:10px;border-radius:8px;box-shadow:0 2px 8px #0002;">`;
+                }
+                if (data.img2) {
+                    imagensHtml += `<img src="${data.img2}" alt="Imagem Produto 2" style="max-width:120px;max-height:120px;margin-left:10px;border-radius:8px;box-shadow:0 2px 8px #0002;">`;
+                }
+                container.innerHTML = `<div class='d-flex justify-content-center align-items-center mb-3'>${imagensHtml}</div><div id='comparison-plotly-graphs'></div>`;
+                // Exibir gráficos
+                const plot1 = JSON.parse(data.plot_json_1);
+                const plot2 = JSON.parse(data.plot_json_2);
+                Plotly.newPlot('comparison-plotly-graphs', [
+                    {
+                        data: plot1.data,
+                        layout: {
+                            ...plot1.layout,
+                            title: `${window.translations['Previsão para'] || 'Previsão para'}: ${product1}`
+                        }
+                    },
+                    {
+                        data: plot2.data,
+                        layout: {
+                            ...plot2.layout,
+                            title: `${window.translations['Previsão para'] || 'Previsão para'}: ${product2}`
+                        }
+                    }
+                ]);
+            } else {
+                container.innerHTML = `<p style='color:red;'>${data.message || 'Erro ao gerar gráfico.'}</p>`;
+            }
+        });
+    });
+}
+</script>
+{% endblock %} 

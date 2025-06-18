@@ -1,0 +1,354 @@
+{% extends 'base.html' %}
+{% block title %}Início | Sohipren S.A.{% endblock %}
+{% block content %}
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>{{ _('Previsão de Faturamento') }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/darkly/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container-fluid">
+    <!-- Banner Principal -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <h1 class="display-4 mb-3" style="color: #fff;">{{ _('Sistema de Previsão de Faturamento') }}</h1>
+                    <p class="lead">{{ _('Análise inteligente para otimizar suas previsões de vendas') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards de Ação Rápida -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+                    <i class="fas fa-chart-line fa-3x mb-2 text-primary"></i>
+                    <a href="{{ url_for('analyze') }}" class="btn btn-primary mt-2">{{ _('Iniciar Análise') }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+                    <i class="fas fa-history fa-3x mb-2 text-success"></i>
+                    <a href="#historico" class="btn btn-success mt-2">{{ _('Ver Histórico') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="mb-3">{{ _('Estatísticas do Sistema') }}</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body text-center">
+                            <h3 class="display-4">{{ historico_previsoes|length }}</h3>
+                            <p class="lead">{{ _('Previsões Realizadas') }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card bg-success text-white">
+                        <div class="card-body text-center">
+                            <h3 class="display-4">{{ historico_comparacoes|length }}</h3>
+                            <p class="lead">{{ _('Comparações Realizadas') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Histórico -->
+    <div id="historico" class="row">
+        <div class="col-12">
+            <h2 class="mb-3">{{ _('Histórico Recente') }}</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">{{ _('Últimas Previsões') }}</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if historico_previsoes %}
+                                <div class="list-group" style="max-height: 350px; overflow-y: auto;">
+                                    {% for previsao in historico_previsoes %}
+                                        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="d-flex w-100 flex-column">
+                                                    <h6 class="mb-1">{{ previsao.nome_arquivo }}</h6>
+                                                </div>
+                                                <p class="mb-1"><strong>Período da Previsão (meses):</strong> {{ previsao.periodo }}</p>
+                                                <small>{{ previsao.data[:16].replace('T', ' ') }}</small>
+                                            </div>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-sm btn-info ver-detalhes-previsao" title="Detalhes" data-previsao-id="{{ previsao.id }}"><i class="fas fa-eye"></i></button>
+                                                <button class="btn btn-sm btn-danger" title="Deletar" onclick="deletarPrevisao('{{ previsao.id }}')"><i class="fas fa-trash-alt"></i></button>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="text-muted">{{ _('Nenhuma previsão realizada ainda.') }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">{{ _('Últimas Comparações') }}</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if historico_comparacoes %}
+                                <div class="list-group" style="max-height: 350px; overflow-y: auto;">
+                                    {% for comparacao in historico_comparacoes %}
+                                        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="d-flex w-100 flex-column">
+                                                    <h6 class="mb-1">{{ comparacao.produto1 }} vs {{ comparacao.produto2 }}</h6>
+                                                </div>
+                                                <p class="mb-1"><strong>ID do Arquivo:</strong> {{ comparacao.arquivo_id }}</p>
+                                                <small>{{ comparacao.data[:16].replace('T', ' ') }}</small>
+                                            </div>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-sm btn-info ver-detalhes-comparacao" title="Detalhes" data-comparacao-id="{{ comparacao.id }}"><i class="fas fa-eye"></i></button>
+                                                <button class="btn btn-sm btn-danger" title="Deletar" onclick="deletarComparacao('{{ comparacao.id }}')"><i class="fas fa-trash-alt"></i></button>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="text-muted">{{ _('Nenhuma comparação realizada ainda.') }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Detalhes da Previsão -->
+<div class="modal fade" id="modalDetalhesPrevisao" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ _('Detalhes da Previsão') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="detalhesPrevisao"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Detalhes da Comparação -->
+<div class="modal fade" id="modalDetalhesComparacao" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ _('Detalhes da Comparação') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="detalhesComparacao"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Resultado da Nova Comparação -->
+<div class="modal fade" id="modalNovaComparacao" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ _('Nova Comparação') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="novaComparacaoPlot"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Estilo para melhorar a visibilidade dos detalhes do modal */
+#modalDetalhesComparacao .modal-content, #modalDetalhesPrevisao .modal-content {
+    background: #fff;
+    color: #222;
+}
+#modalDetalhesComparacao .modal-title, #modalDetalhesPrevisao .modal-title {
+    color: #1976d2;
+    font-weight: bold;
+}
+#detalhesComparacao p, #detalhesPrevisao p {
+    margin-bottom: 0.7em;
+    font-size: 1.08em;
+}
+#detalhesComparacao strong, #detalhesPrevisao strong {
+    color: #1976d2;
+    font-weight: 600;
+}
+#detalhesComparacao, #detalhesPrevisao {
+    padding: 0.5em 0.2em;
+}
+.btn-delete-discreet {
+    background: #dc3545 !important;
+    border: none;
+    color: #fff !important;
+    font-size: 1.2em;
+    padding: 2px 6px;
+    border-radius: 50%;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-delete-discreet:hover, .btn-delete-discreet:focus {
+    background: #a71d2a !important;
+    color: #fff !important;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Delegação de eventos para os botões
+    document.body.addEventListener('click', async function(e) {
+        // Ver Detalhes Previsão
+        if (e.target.classList.contains('ver-detalhes-previsao')) {
+            const previsaoId = e.target.dataset.previsaoId;
+            try {
+                const response = await fetch(`/api/previsao/${previsaoId}`);
+                const data = await response.json();
+                if (data.success) {
+                    const previsao = data.previsao;
+                    document.getElementById('detalhesPrevisao').innerHTML = `
+                        <p><strong>${window.translations['Arquivo'] || 'Arquivo'}:</strong> ${previsao.arquivo}</p>
+                        <p><strong>${window.translations['Data'] || 'Data'}:</strong> ${previsao.data}</p>
+                        <p><strong>${window.translations['Período'] || 'Período'}:</strong> ${previsao.periodo}</p>
+                        <p><strong>${window.translations['Test Ratio'] || 'Test Ratio'}:</strong> ${previsao.test_ratio}</p>
+                        <p><strong>${window.translations['Changepoint Scale'] || 'Changepoint Scale'}:</strong> ${previsao.changepoint_scale}</p>
+                        <p><strong>${window.translations['Seasonality Scale'] || 'Seasonality Scale'}:</strong> ${previsao.seasonality_scale}</p>
+                        <p><strong>${window.translations['Coluna Data'] || 'Coluna Data'}:</strong> ${previsao.coluna_data}</p>
+                        <p><strong>${window.translations['Coluna Valor'] || 'Coluna Valor'}:</strong> ${previsao.coluna_valor}</p>
+                        <p><strong>${window.translations['Coluna Produto'] || 'Coluna Produto'}:</strong> ${previsao.coluna_produto}</p>
+                        <p><strong>${window.translations['Coluna Cliente'] || 'Coluna Cliente'}:</strong> ${previsao.coluna_cliente}</p>
+                    `;
+                    bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDetalhesPrevisao')).show();
+                }
+            } catch (error) {
+                console.error('Erro ao obter detalhes da previsão:', error);
+            }
+        }
+        // Ver Detalhes Comparação
+        if (e.target.classList.contains('ver-detalhes-comparacao')) {
+            const comparacaoId = e.target.dataset.comparacaoId;
+            try {
+                // Buscar detalhes da comparação
+                const response = await fetch(`/api/comparacao/${comparacaoId}`);
+                const data = await response.json();
+                if (data.success) {
+                    const comparacao = data.comparacao;
+                    // Buscar imagens em tempo real
+                    const imgResp = await fetch('/api/compare_products', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            product_1: comparacao.produto1,
+                            product_2: comparacao.produto2,
+                            file_id: comparacao.arquivo_id
+                        })
+                    });
+                    const imgData = await imgResp.json();
+                    let imagensHtml = '';
+                    if (imgData.img1) {
+                        imagensHtml += `<img src="${imgData.img1}" alt="Imagem Produto 1" style="max-width:120px;max-height:120px;margin-right:10px;border-radius:8px;box-shadow:0 2px 8px #0002;">`;
+                    }
+                    if (imgData.img2) {
+                        imagensHtml += `<img src="${imgData.img2}" alt="Imagem Produto 2" style="max-width:120px;max-height:120px;margin-left:10px;border-radius:8px;box-shadow:0 2px 8px #0002;">`;
+                    }
+                    document.getElementById('detalhesComparacao').innerHTML = `
+                        <div class='d-flex justify-content-center align-items-center mb-3'>${imagensHtml}</div>
+                        <p><strong>${window.translations['Produto 1'] || 'Produto 1'}:</strong> ${comparacao.produto1}</p>
+                        <p><strong>${window.translations['Produto 2'] || 'Produto 2'}:</strong> ${comparacao.produto2}</p>
+                        <p><strong>${window.translations['Data'] || 'Data'}:</strong> ${comparacao.data}</p>
+                        <p><strong>${window.translations['Coluna Data'] || 'Coluna Data'}:</strong> ${comparacao.coluna_data}</p>
+                        <p><strong>${window.translations['Coluna Valor'] || 'Coluna Valor'}:</strong> ${comparacao.coluna_valor}</p>
+                        <p><strong>${window.translations['Coluna Produto'] || 'Coluna Produto'}:</strong> ${comparacao.coluna_produto}</p>
+                        <p><strong>${window.translations['Coluna Cliente'] || 'Coluna Cliente'}:</strong> ${comparacao.coluna_cliente}</p>
+                    `;
+                    bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDetalhesComparacao')).show();
+                }
+            } catch (error) {
+                console.error('Erro ao obter detalhes da comparação:', error);
+            }
+        }
+        // Deletar previsão
+        if (e.target.classList.contains('deletar-previsao')) {
+            const id = e.target.dataset.previsaoId;
+            if (confirm('Deseja realmente deletar esta previsão?')) {
+                const resp = await fetch(`/api/delete_previsao/${id}`, {method: 'POST'});
+                const data = await resp.json();
+                if (data.success) {
+                    e.target.closest('.list-group-item').remove();
+                } else {
+                    alert('Erro ao deletar previsão: ' + (data.message || ''));
+                }
+            }
+        }
+        // Deletar comparação
+        if (e.target.classList.contains('deletar-comparacao')) {
+            const id = e.target.dataset.comparacaoId;
+            if (confirm('Deseja realmente deletar esta comparação?')) {
+                const resp = await fetch(`/api/delete_comparacao/${id}`, {method: 'POST'});
+                const data = await resp.json();
+                if (data.success) {
+                    e.target.closest('.list-group-item').remove();
+                } else {
+                    alert('Erro ao deletar comparação: ' + (data.message || ''));
+                }
+            }
+        }
+    });
+});
+
+function abrirDetalhesPrevisao(id) {
+    window.location.href = '/api/previsao/' + id;
+}
+function abrirDetalhesComparacao(id) {
+    window.location.href = '/api/comparacao/' + id;
+}
+function deletarPrevisao(id) {
+    if (confirm('Tem certeza que deseja deletar esta previsão?')) {
+        fetch('/api/delete_previsao/' + id, {method: 'POST'})
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) { if(data.success) location.reload(); else alert('Erro ao deletar.'); });
+    }
+}
+function deletarComparacao(id) {
+    if (confirm('Tem certeza que deseja deletar esta comparação?')) {
+        fetch('/api/delete_comparacao/' + id, {method: 'POST'})
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) { if(data.success) location.reload(); else alert('Erro ao deletar.'); });
+    }
+}
+</script>
+</body>
+</html>
+{% endblock %}

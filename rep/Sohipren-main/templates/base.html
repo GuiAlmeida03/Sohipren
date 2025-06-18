@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sohipren S.A.{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header class="sohipren-header">
+        <div class="header-left">
+            <a href="{{ url_for('home1') }}" class="header-logo-area" style="text-decoration: none; color: inherit;">
+                <img src="{{ url_for('static', filename='img/images.jpg') }}" alt="Sohipren S.A." class="logo logo-large">
+                <div class="header-titles">
+                    <h1>Sohipren S.A.</h1>
+                    <span class="slogan">{{ _('Excelência em Soluções Oleohidráulicas') }}</span>
+                </div>
+            </a>
+            {% if session.get('logged_in') %}
+                <div class="logged-in-container">
+                    <span class="login-status login-status-fade" id="loggedInStatus">{{ _('Você está Logado') }}</span>
+                    <a href="{{ url_for('logout') }}" class="logout-btn logout-btn-fade fade-out" id="logoutButton">{{ _('Deslogar') }}</a>
+                </div>
+            {% elif request.endpoint != 'login' %}
+                <a href="{{ url_for('login') }}" class="login-btn">{{ _('Login') }}</a>
+            {% endif %}
+        </div>
+        <form id="lang-form" method="get" action="">
+            <label for="lang-select" class="lang-label">🌐 {{ _('Idioma:') }}</label>
+            <select id="lang-select" name="lang" class="form-select">
+                <option value="pt" {% if session.get('language', 'pt') == 'pt' %}selected{% endif %}>Português</option>
+                <option value="en" {% if session.get('language') == 'en' %}selected{% endif %}>English</option>
+                <option value="es" {% if session.get('language') == 'es' %}selected{% endif %}>Español</option>
+            </select>
+        </form>
+    </header>
+    
+    <div class="sohipren-bar"></div>
+    
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer class="footer mt-5 py-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Sohipren S.A.</h5>
+                    <p>{{ _('Excelência em Soluções Oleohidráulicas') }}</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>{{ _('Contato') }}</h5>
+                    <p>
+                        <i class="fas fa-phone"></i> +55 (11) 1234-5678<br>
+                        <i class="fas fa-envelope"></i> contato@sohipren.com.br
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h5>{{ _('Redes Sociais') }}</h5>
+                    <div class="social-links">
+                        <a href="#" class="me-2"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script>
+    window.translations = {
+        "Por favor, selecione dois produtos diferentes para comparar.": "{{ _('Por favor, selecione dois produtos diferentes para comparar.') }}",
+        "Gerando gráfico comparativo...": "{{ _('Gerando gráfico comparativo...') }}",
+        "Erro:": "{{ _('Erro:') }}",
+        "Erro de conexão ao gerar previsão.": "{{ _('Erro de conexão ao gerar previsão.') }}",
+        "Entrada bloqueada por segurança.": "{{ _('Entrada bloqueada por segurança.') }}",
+        "Atividade suspeita detectada. Operação bloqueada.": "{{ _('Atividade suspeita detectada. Operação bloqueada.') }}"
+    };
+
+    document.getElementById('lang-select').addEventListener('change', function() {
+        window.location.href = '/language/' + this.value;
+    });
+
+    // JavaScript para o efeito de hover no status de login
+    const loggedInStatus = document.getElementById('loggedInStatus');
+    const logoutButton = document.getElementById('logoutButton');
+    const loggedInContainer = document.querySelector('.logged-in-container');
+
+    if (loggedInContainer) {
+        loggedInContainer.addEventListener('mouseenter', () => {
+            if (loggedInStatus) loggedInStatus.classList.add('slide-out');
+            if (logoutButton) {
+                logoutButton.classList.remove('slide-out');
+                logoutButton.classList.add('slide-in');
+            }
+        });
+
+        loggedInContainer.addEventListener('mouseleave', () => {
+            if (logoutButton) {
+                logoutButton.classList.remove('slide-in');
+                logoutButton.classList.add('slide-out');
+            }
+            if (loggedInStatus) loggedInStatus.classList.remove('slide-out');
+        });
+    }
+
+    function sanitizeInput(value) {
+        return value.replace(/<.*?>/g, '');
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('input[type="text"], textarea').forEach(function(input) {
+            input.addEventListener('input', function(e) {
+                const original = input.value;
+                const sanitized = sanitizeInput(original);
+                if (original !== sanitized) {
+                    input.value = sanitized;
+                }
+                if (/\<script.*?\>/i.test(original)) {
+                    input.value = '';
+                    alert(window.translations['Entrada bloqueada por segurança.']);
+                }
+            });
+        });
+    });
+
+    function isSuspiciousInput(value) {
+        const patterns = [
+            /\$(gt|ne|or|and|eq|nin|in|not|exists|regex|where|expr|jsonSchema|mod|text|geo|near|all|elemMatch|size|type)\b/i,
+            /(--|;|\b(SELECT|INSERT|UPDATE|DELETE|DROP|UNION|OR|AND)\b)/i
+        ];
+        return patterns.some(pattern => pattern.test(value));
+    }
+
+    document.querySelectorAll('input[type="text"], input[type="password"], textarea').forEach(function(input) {
+        input.addEventListener('input', function(e) {
+            if (isSuspiciousInput(input.value)) {
+                input.value = '';
+                alert(window.translations['Atividade suspeita detectada. Operação bloqueada.']);
+            }
+        });
+        input.addEventListener('paste', function(e) {
+            const pasted = (e.clipboardData || window.clipboardData).getData('text');
+            if (isSuspiciousInput(pasted)) {
+                e.preventDefault();
+                alert(window.translations['Atividade suspeita detectada. Operação bloqueada.']);
+            }
+        });
+    });
+    </script>
+</body>
+</html>

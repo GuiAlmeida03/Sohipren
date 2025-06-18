@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{ _('Login') }} | Sohipren S.A.{% endblock %}
+{% block content %}
+<div class="login-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-message flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <h2>{{ _('Login') }}</h2>
+    {% if error %}
+        <div class="login-error">{{ error }}</div>
+    {% endif %}
+    <form method="post" action="{{ url_for('login') }}">
+        <label for="username">{{ _('Usuário') }}</label>
+        <input type="text" id="username" name="username" required autofocus>
+        <label for="password">{{ _('Senha') }}</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">{{ _('Entrar') }}</button>
+    </form>
+</div>
+{% endblock %} 
