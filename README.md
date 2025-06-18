@@ -58,8 +58,6 @@ sohipren-flask/
 |-- babel.cfg                   # Arquivo de configuração para o Flask-Babel
 `-- requirements.txt            # Lista de todas as dependências do projeto
 
-...Até aqui.
-
 ## 🚀 Configuração e Instalação
 
 Siga os passos abaixo para rodar o projeto em sua máquina local.
@@ -97,26 +95,26 @@ Siga os passos abaixo para rodar o projeto em sua máquina local.
 
 A aplicação já vem com as traduções para Inglês e Espanhol. Caso você altere ou adicione textos na interface, siga os passos abaixo para atualizar os arquivos de tradução.
 
-1.  **Extrair os textos:** Este comando varre o código em busca de textos novos e atualiza o arquivo "molde" `messages.pot`.
+1.  **Extrair os textos:**
     ```bash
     pybabel extract -F babel.cfg -o messages.pot .
     ```
 
-2.  **Atualizar os arquivos de idioma:** Este comando mescla as novas alterações nos arquivos `.po` de cada idioma.
+2.  **Atualizar os arquivos de idioma:**
     ```bash
     pybabel update -i messages.pot -d translations
     ```
 
 3.  **Traduzir:** Abra os arquivos `.po` na pasta `translations` e preencha as novas traduções no campo `msgstr ""`.
 
-4.  **Compilar as traduções:** Este é o passo final para que as traduções apareçam na aplicação.
+4.  **Compilar as traduções:**
     ```bash
     pybabel compile -d translations
     ```
 
 ## ▶️ Como Executar a Aplicação
 
-Com as dependências instaladas e as traduções compiladas, inicie o servidor Flask com o seguinte comando:
+Com as dependências instaladas e as traduções compiladas, inicie o servidor Flask:
 
 ```bash
 flask run --debug
