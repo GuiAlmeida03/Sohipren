@@ -58,6 +58,8 @@ sohipren-flask/
 |-- babel.cfg                   # Arquivo de configuração para o Flask-Babel
 `-- requirements.txt            # Lista de todas as dependências do projeto
 
+...Até aqui.
+
 ## 🚀 Configuração e Instalação
 
 Siga os passos abaixo para rodar o projeto em sua máquina local.
