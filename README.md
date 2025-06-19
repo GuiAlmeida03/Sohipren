@@ -21,8 +21,8 @@ A ferramenta permite que um usuário autenticado carregue um relatório de venda
 - **Upload de Dados Simplificado:** Carregue facilmente arquivos `.xlsx` através de uma interface web amigável.
 - **Dashboard de KPIs:** Visualize instantaneamente os números mais importantes do seu negócio, como Faturamento Total, Ticket Médio, Total de Transações, Clientes e Produtos Únicos.
 - **Previsão de Faturamento Configurável:** Utilize o poder do Prophet para gerar previsões, com parâmetros de modelo (frequência, períodos, sazonalidade, etc.) totalmente configuráveis pelo usuário.
-- **Histórico Persistente:** Todas as análises de previsão e comparações são salvas em um banco de dados **SQLite**, permitindo que o usuário visualize, delete ou refaça análises antigas a qualquer momento.
-- **Comparação de Produtos Dinâmica:** Selecione dois produtos e visualize suas previsões de faturamento lado a lado. As imagens dos produtos são buscadas em tempo real no Google para uma experiência mais rica.
+- **Histórico Persistente:** Através da persistência de dados em um banco SQLite, todo o histórico de previsões e comparativos de produtos fica salvo. Isso permite que o usuário visualize, delete ou refaça análises antigas a qualquer momento.
+- **Comparação de Produtos Dinâmica:** Selecione dois produtos para visualizar suas previsões de faturamento lado a lado. Para enriquecer a comparação, a aplicação realiza uma requisição externa através de web scraping no Google Imagens, buscando e exibindo dinamicamente as imagens correspondentes a cada peça.
 - **Gráficos Interativos:** Todos os gráficos de previsão são gerados com a biblioteca **Plotly**, permitindo zoom, visualização de valores ao passar o mouse e a capacidade de ligar/desligar séries de dados clicando na legenda.
 - **Exportação de Dados:** Exporte a tabela detalhada da previsão gerada para os formatos **CSV** e **Excel (.xlsx)** com um único clique.
 - **Suporte a Múltiplos Idiomas (i18n):** A interface está totalmente traduzida para **Português, Inglês e Espanhol**, com um seletor manual para fácil alternância.
