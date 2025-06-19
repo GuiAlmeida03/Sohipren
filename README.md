@@ -124,9 +124,9 @@ flask run --debug
 O servidor estará rodando em modo de depuração. Abra seu navegador e acesse: http://127.0.0.1:5000
 
 💡 Como Usar
-Faça Login: Acesse a aplicação e entre com as credenciais de administrador (usuário: admin, senha: 123).
-Navegue pelo Histórico: Na página inicial, visualize as análises de previsão e comparações realizadas anteriormente. Você pode deletá-las ou refazê-las com um clique.
-Inicie uma Nova Análise: Vá para a página de análise para carregar um novo arquivo Excel.
-Configure a Análise: Verifique se os nomes das colunas de Data, Valor, Produto e Cliente correspondem aos do seu arquivo. Ajuste os parâmetros do modelo conforme sua necessidade.
-Execute: Clique em "Executar Análise".
-Analise os Resultados: Navegue pelos KPIs, gráficos interativos e tabelas na página de resultados. Use a funcionalidade de comparação e exporte os dados se necessário.
+1-Faça Login: Acesse a aplicação e entre com as credenciais de administrador (usuário: admin, senha: 123).
+2-Navegue pelo Histórico: Na página inicial, visualize as análises de previsão e comparações realizadas anteriormente. Você pode deletá-las ou refazê-las com um clique.
+3-Inicie uma Nova Análise: Vá para a página de análise para carregar um novo arquivo Excel.
+4-Configure a Análise: Verifique se os nomes das colunas de Data, Valor, Produto e Cliente correspondem aos do seu arquivo. Ajuste os parâmetros do modelo conforme sua necessidade.
+5-Execute: Clique em "Executar Análise".
+6-Analise os Resultados: Navegue pelos KPIs, gráficos interativos e tabelas na página de resultados. Use a funcionalidade de comparação e exporte os dados se necessário.
