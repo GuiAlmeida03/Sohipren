@@ -130,3 +130,27 @@ O servidor estará rodando em modo de depuração. Abra seu navegador e acesse: 
 4-Configure a Análise: Verifique se os nomes das colunas de Data, Valor, Produto e Cliente correspondem aos do seu arquivo. Ajuste os parâmetros do modelo conforme sua necessidade.
 5-Execute: Clique em "Executar Análise".
 6-Analise os Resultados: Navegue pelos KPIs, gráficos interativos e tabelas na página de resultados. Use a funcionalidade de comparação e exporte os dados se necessário.
+
+```
+
+## 📜 Histórico de Commits Pertinentes
+
+```
+
+f43e697  |  2025-06-15  |  Initial commit
+1bfb013  |  2025-06-15  |  Meu primeiro commit com o projeto 
+243cc05  |  2025-06-15  |  Merge branch 'main' of https://github.com/GuiAlmeida03/Sohipren-
+845e4fd  |  2025-06-15  |  Update README.md
+8cf8942  |  2025-06-16  |  Substitui versão Streamlit pelo projeto Flask completo
+9aea260  |  2025-06-16  |  Update README.md
+c11fb52  |  2025-06-16  |  Remove arquivo obsoleto streamlit_app.py
+58e6877  |  2025-06-18  |  Removidos todos os arquivos do projeto
+271e7bc  |  2025-06-18  |  Commit final do projeto Sohipren
+2e7c766  |  2025-06-18  |  Create README.md 2
+
+```
+
+
+
+
+
