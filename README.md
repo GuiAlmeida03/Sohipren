@@ -40,23 +40,31 @@ A ferramenta permite que um usuário autenticado carregue um relatório de venda
 
 ## 📁 Estrutura do Projeto
 
+```
 sohipren-flask/
 |-- app.py                      # Servidor Flask, rotas, API e lógica de autenticação
 |-- database.py                 # Classe para gerenciamento do banco de dados SQLite
 |-- faturamento_forecast_class.py # Classe com toda a lógica de análise e previsão
 |-- static/                     # Arquivos estáticos (CSS, JS, Imagens)
 |   |-- css/
-|   |   -- style.css |-- img/
+|   |   `-- style.css
+|   `-- img/
 |-- templates/                  # Templates HTML (a "cara" do site)
 |   |-- index.html              # Dashboard principal com histórico
 |   |-- analyze.html            # Página do formulário de upload
 |   |-- results.html            # Página que exibe os resultados da análise
 |   |-- login.html              # Página de login
-|   -- base.html # Template base com a estrutura do site |-- translations/ # Pasta com os arquivos de tradução | |-- en/LC_MESSAGES/ | |-- es/LC_MESSAGES/ |-- pt/LC_MESSAGES/
+|   `-- base.html               # Template base com a estrutura do site
+|-- translations/               # Pasta com os arquivos de tradução
+|   |-- en/LC_MESSAGES/
+|   |-- es/LC_MESSAGES/
+|   `-- pt/LC_MESSAGES/
 |-- uploads/                    # Pasta temporária para arquivos carregados e gerados
 |-- .gitignore                  # Arquivos e pastas a serem ignorados pelo Git
 |-- babel.cfg                   # Arquivo de configuração para o Flask-Babel
 `-- requirements.txt            # Lista de todas as dependências do projeto
+
+```
 
 ## 🚀 Configuração e Instalação
 
